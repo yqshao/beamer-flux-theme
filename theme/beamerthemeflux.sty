@@ -1,0 +1,155 @@
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome}
+\usepackage{tikz}
+\usetikzlibrary{shapes,calc,positioning,arrows}
+\mode<presentation>
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usepackage{enumitem}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{chemfig}
+\setchemfig{
+  atom sep=12.5pt,
+  fixed length=true,
+  cram width=3pt, 
+  bond style={line width=.8pt}, 
+  bond join=true}
+\renewcommand*{\printatom}[1]{\scriptsize\ensuremath{\mathrm{#1}}}
+
+\newlength{\gmargin}
+\newlength{\hpad}
+\newlength{\vpad}
+\newlength{\sigillsize}
+\newlength{\gwidth}
+\setlength{\gmargin}{.05\paperheight}
+\setlength{\hpad}{.02\paperheight}
+\setlength{\vpad}{.01\paperheight}
+\setlength{\sigillsize}{.618\paperheight}
+\setlength{\gwidth}{\dimexpr(\paperwidth-\gmargin*2)}
+\setlist[1]{leftmargin=\gmargin}
+\setlist[itemize]{label=\faAngleDoubleRight}
+\setlist[2]{leftmargin=\gmargin}
+
+\definecolor{uured}{HTML}{990000}
+\definecolor{uugray}{HTML}{aaaaaa}
+\definecolor{myblue}{HTML}{000099}
+\definecolor{mygreen}{HTML}{009900}
+\hypersetup{colorlinks,linkcolor=,urlcolor=uured}
+
+\setbeamercolor{section in head/foot}{bg=uudarkgrey, fg=white}
+\setbeamercolor{section in foot}{bg=uudarkgrey, fg=white}
+\setbeamercolor{subsection in foot}{bg=uured, fg=white}
+\setbeamercolor{pagenumber in foot}{bg=uudarkgrey, fg=white}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=uured}
+\setbeamercolor{example text}{fg=black}
+\setbeamercolor{structure}{fg=black}
+\setbeamerfont{caption}{size=\scriptsize}
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamersize{text margin left=\gmargin,text margin right=\gmargin} 
+
+\newif\ifinappendix%
+\let\oldappendix\appendix%
+\renewcommand{\appendix}{%
+  \oldappendix%
+  \inappendixtrue%
+}
+\renewcommand\appendixname{Appendix}
+
+\setbeamertemplate{title page}[default][left]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle}{\vspace{\gmargin}\insertframetitle}
+\setbeamertemplate{caption}{\color{uured}Fig:~\color{black} \raggedright\insertcaption\par}
+\setbeamertemplate{footline}{\vspace{\gmargin}}
+\setbeamertemplate{headline}{%
+  \scriptsize\vspace{\gmargin}\hspace{\gmargin}\linenav\hfill%
+  {%
+    {\bfseries\ifinappendix{Backup~}%
+      \else{\ifdefined\insertsubsectionhead{\insertsubsectionhead~}\else{}\fi}\fi}%
+    \faAngleDoubleLeft%
+    ~{\bfseries\insertframenumber/\inserttotalframenumber}}%
+  \hspace{\gmargin}\vspace{\vpad}%
+  
+\hspace{\gmargin}%
+  {\tikz{\draw[densely dotted, line width=.4pt] (0,0) -- (\gwidth,0);}}}%
+
+\setbeamertemplate{footnote}{%
+  \makebox[1.8em][l]{\insertfootnotemark}\insertfootnotetext}
+
+\setlength\abovecaptionskip{-2pt}
+\setlength\belowcaptionskip{-2pt}
+
+\renewcommand\footnoterule{
+  \parbox[0pt]{\paperwidth}{
+    \tikz{\draw[densely dotted, line width=.4pt] (0,0) -- (.5\textwidth,0);}}}
+
+\def\linenav{%
+  {%
+    \def\slideentry##1##2##3##4##5##6{}%
+    \def\sectionentry##1##2##3##4##5{%
+      \def\insertsectionhead{##2}%
+      {%
+        \ifnum\c@section=##1%
+        {\color{black}\bfseries\insertsectionhead}%
+        \else%
+        {\color{uugray}\insertsectionhead}%
+        \fi%
+        \hspace{\hpad}
+      }%
+    }%
+    \dohead%
+  }%
+}
+
+% Redefine footnote
+\AtBeginEnvironment{frame}{\setcounter{footnote}{0}}
+\makeatletter
+% normal text fn mark
+\renewcommand{\thefootnote}{[\alph{footnote}]}
+\def\@makefnmarknosuper{\hbox{{\usebeamerfont{footnote}\@thefnmark}}}
+\def\@makefntext#1{%
+  \def\insertfootnotetext{#1}%
+  \def\insertfootnotemark{\@makefnmarknosuper}%
+  \usebeamertemplate***{footnote}}
+\renewcommand<>{\footnote}[1][frame]{%
+  \let\beamer@footnotetext=\@footnotetext%
+  \let\beamer@mpfn=\@mpfn%
+  \let\beamer@thempfn=\thempfn%
+  \let\beamer@kvorig=\KV@errx%
+  \let\beamer@xkvorig=\XKV@err
+  \def\beamer@footarg{}%
+  \def\KV@errx##1{\edef\beamer@footarg{\@tempa}}%
+  \def\XKV@err##1{\edef\beamer@footarg{\XKV@tkey}}%
+  \setkeys{beamerfootnote}{#1}%
+  \let\KV@errx=\beamer@kvorig%
+  \let\XKV@errx=\beamer@xkvorig
+  \ifx\beamer@footarg\@empty%
+    \def\beamer@next{\stepcounter\beamer@mpfn
+      \protected@xdef\@thefnmark{\tiny\beamer@thempfn}%
+      \@footnotemark\beamer@footnotetext#2}%
+  \else%
+    \def\beamer@next{%
+      \begingroup
+        \csname c@\beamer@mpfn\endcsname\beamer@footarg\relax
+        \unrestored@protected@xdef\@thefnmark{\tiny\beamer@thempfn}%
+      \endgroup
+      \@footnotemark\beamer@footnotetext#2}%
+  \fi%
+  \beamer@next}
+\makeatother
+\DefineBibliographyExtras{english}{\let\finalandcomma=\empty}
+\DeclareFieldFormat[article]{pages}{#1}
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+{\usebibmacro{prenote}}
+{\tiny\printnames[family]{labelname}%
+  \ifentrytype{article}{~\printfield{journaltitle}%
+    \iffieldundef{volume}{}{~\bfseries\printfield{volume}\normalfont}%
+    \iffieldundef{pages}{}{~\printfield{pages}}%
+    ~(\printfield{year})%
+    \iffieldundef{pages}{~\printfield{doi}}{}}%
+  {~\printfield{title}~(\printfield{year})}%
+  \newunit}%
+{\addperiod\space}%
+{\usebibmacro{postnote}}%
+\mode<all>

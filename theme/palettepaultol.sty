@@ -1,0 +1,19 @@
+% This file implement the color schemes designed by Paul Tol
+% See his original blog post for further discussion
+
+% qualitative colors - medium contrast scheme
+\definecolor{mcdarkblue}{HTML}{004488}
+\definecolor{mcdarkred}{HTML}{994455}
+\definecolor{mcdarkyellow}{HTML}{997700}
+\definecolor{mclightblue}{HTML}{6699CC}
+\definecolor{mclightred}{HTML}{EECC66}
+\definecolor{mclightyellow}{HTML}{EE99AA}
+
+\pgfplotscreateplotcyclelist{qualmc}{%
+  {mcdarkblue,mark=*,mark options={fill=white,solid},thick},
+  {mcdarkred,mark={square*},mark options={fill=white,solid},thick},
+  {mcdarkyellow,mark={triangle*},mark options={fill=white,solid},thick,mark size=2.75pt},
+  {mclightblue,mark=*,mark options={draw=white,solid},thick},
+  {mclightred,mark={square*},mark options={draw=white,solid},thick},
+  {mclightyellow,mark={triangle*},mark options={draw=white,solid},thick,mark size=2.75pt}
+}

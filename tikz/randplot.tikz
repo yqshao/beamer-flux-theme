@@ -1,0 +1,15 @@
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\begin{axis}[cycle list name=qualmc,grid={major},
+    xlabel={random x [no dim.]},
+    ylabel={random y [no dim.]},
+    xlabel style={yshift=5pt},
+    ylabel style={yshift=-5pt},
+    grid style={black,dash pattern=on .4pt off 1pt,line width=.4pt}]
+\addplot {rnd-0};
+\addplot {rnd-1};
+\addplot {rnd-2};
+\addplot {rnd-3};
+\addplot {rnd-4};
+\addplot {rnd-5};
+\end{axis}
+\end{tikzpicture}

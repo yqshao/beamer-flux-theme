@@ -95,10 +95,10 @@
 \begin{frame}[fragile]{Default Packages}
 Some pacakges are loaded by default, and their styles customized:
 \begin{itemize}
-    \item enumitem
-    \item mathtools
-    \item tikz/pgf
-    \item chemfig \begin{dotlst}[%
+    \item enumitem;
+    \item mathtools;
+    \item tikz/pgf;
+    \item chemfig. \begin{dotlst}[%
       listing side text,righthand ratio=.48,
       title={Chemfig Example: $\mathrm{[BMIM][HOAc]}$}
     ]
@@ -120,13 +120,16 @@ Some pacakges are loaded by default, and their styles customized:
     \column{.48\textwidth}
     \begin{itemize}
       \item Palette taken from \href{https://personal.sron.nl/~pault/#sec:qualitative}{Paul Tol};
-      \item Insert plots with \href{https://ctan.org/pkg/tikzscale?lang=en}{tikzscale};
+      \item <2-> Insert plots with \href{https://ctan.org/pkg/tikzscale?lang=en}{tikzscale}.%
+      \footnote{\texttt{listing} like the one shown below works with only \texttt{onlyenv}, but not \texttt{\textbackslash{}only} overly.}%
+        \begin{onlyenv}<2>
         \begin{dotlst}[title={Example plot}]
 \includegraphics[%
   width=\textwidth,%
   height=.75\textwidth]%
   {tikz/randplot.tikz}
         \end{dotlst}
+      \end{onlyenv}
     \end{itemize}
     \column{.48\textwidth}
     \includegraphics[width=\textwidth,height=.75\textwidth]{tikz/randplot.tikz}
@@ -143,7 +146,7 @@ Some pacakges are loaded by default, and their styles customized:
 \begin{frame}[fragile]{Random Tips}
 \begin{itemize}
   \item Appendices are backup slides (separate page no.);
-  \item Externalizing TikZ pictures;%
+  \item Externalizing TikZ pictures.%
   \begin{dotlst}[%
     listing side comment,righthand ratio=0.38,comment={\inptikz{onsager}}
     ]

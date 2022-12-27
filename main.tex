@@ -5,8 +5,9 @@
 % font settings ===============================================================
 \usepackage[T1]{fontenc}
 \usepackage{tgpagella}\usefonttheme{serif}
-% \usepackage{classico} 
-% ^-- alternatively, use this if you manage to install the non-free fonts, or
+% \usepackage[math]{kurier}
+% \usepackage{classico}
+% ^-- some alternative fonts, classico requires the non-free fonts, or
 % find your pick from the comprehensive list:  https://tug.org/FontCatalogue/
 % =============================================================================
 
@@ -29,8 +30,8 @@
 
 \begin{frame}[fragile]{Basic Design}
 \begin{itemize}
-  \item Pinciples: \begin{itemize}[label={\tiny\faCircleO}]
-    \item Avoid too many colors;
+  \item Principles: \begin{itemize}[label={\tiny\faCircleO}]
+    \item Avoid too many colours;
     \item Dotted lines for separation;
   \end{itemize}
   \item Minimalistic outline on top w. page numbers;
@@ -47,13 +48,13 @@
 \end{frame}
 
 \begin{frame}[fragile]{Default Packages}
-Some pacakges are loaded by default, and their styles customized:
+Some packages are loaded by default, and their styles customized:
 \begin{itemize}
     \item enumitem;
     \item mathtools;
     \item tikz/pgf;
     \item chemfig.%
-     \footnote{\texttt{listing} like the one shown here works with \texttt{\textbackslash{}begin\{onlyenv\}<>}, but not the \texttt{\textbackslash{}only<>} overly.}%
+     \footnote{\texttt{listing} like the one shown here works with \texttt{\textbackslash{}begin\{onlyenv\}<>}, but not the \texttt{\textbackslash{}only<>} overlay.}%
      \begin{dotlst}[%
       listing side text,righthand ratio=.48,
       title={Chemfig Example: $\mathrm{[BMIM][HOAc]}$}
@@ -77,7 +78,7 @@ Some pacakges are loaded by default, and their styles customized:
     \begin{itemize}
       \item Palette taken from \href{https://personal.sron.nl/~pault/#sec:qualitative}{Paul Tol};
       \item <2-> Insert plots with \texttt{\textbackslash{}incltikz}.%
-        \footnote{This handels the scaling and externalizing of tikz pictures (see backup for definition).}%
+        \footnote{This handles the scaling and externalizing of tikz pictures (see backup for definition).}%
         \begin{onlyenv}<2>
         \begin{dotlst}[title={Example plot}]
 \incltikz[%

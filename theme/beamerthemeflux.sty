@@ -7,7 +7,50 @@
 \useinnertheme{default}
 \usepackage{enumitem}
 \usepackage{appendixnumberbeamer}
+\setbeamercovered{transparent}
 
+% tikz and tcb settings =======================================================
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=build/,only named=true]
+\usepackage{tikzscale}
+\newcommand{\incltikz}[2][]{%
+  \tikzsetnextfilename{#2}%
+  \includegraphics[#1]{tikz/#2.tikz}%
+}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{listings}
+\tcbset{
+  shield externalize,
+  dot/.style={
+    sharp corners,
+    frame hidden,
+    top=4pt,left=4pt,right=4pt,bottom=4pt,
+    enhanced,
+    colback=white,
+    coltitle=black,
+    fonttitle=\scriptsize,
+    attach boxed title to bottom right={
+      xshift=-2mm,yshift=2.75mm},
+    boxed title style={colback=white,frame hidden, 
+      top=0pt,left=0pt,right=0pt,bottom=0pt},
+    borderline={.4pt}{0pt}{black,densely dotted},
+    segmentation style={line width=.4pt,black,densely dotted},
+    }
+}
+
+\newtcolorbox{dotbox}[1][]{dot,#1}
+\newtcblisting{dotlst}[1][]{
+  dot,listing only,before=\begin{center},after=\end{center},
+  listing options={% 
+    basicstyle=\ttfamily\scriptsize,commentstyle=\color{gray}\ttfamily,
+    language=TeX},
+  #1}
+
+% =============================================================================
+
+% Chemfig setup ===============================================================
 \usepackage{chemfig}
 \setchemfig{
   atom sep=12.5pt,
@@ -16,6 +59,16 @@
   bond style={line width=.8pt}, 
   bond join=true}
 \renewcommand*{\printatom}[1]{\scriptsize\ensuremath{\mathrm{#1}}}
+% =============================================================================
+
+% Other packages ==============================================================
+\usepackage{graphicx}
+\usepackage[frak=euler]{mathalpha}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{biblatex}
+% =============================================================================
 
 \newlength{\gmargin}
 \newlength{\hpad}

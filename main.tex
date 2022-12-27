@@ -1,71 +1,25 @@
 
 \documentclass[t]{beamer}
 \usepackage[utf8]{inputenc}
-\setbeamercovered{transparent}
 
-% ---- font settings -------------------------------
+% font settings ===============================================================
 \usepackage[T1]{fontenc}
-\usepackage{tgpagella}
-\usefonttheme{serif}
-% --------------------------------------------------
+\usepackage{tgpagella}\usefonttheme{serif}
+% \usepackage{classico} 
+% ^-- alternatively, use this if you manage to install the non-free fonts, or
+% find your pick from the comprehensive list:  https://tug.org/FontCatalogue/
+% =============================================================================
 
-% ---- tikz settings -------------------------------
-\usepackage{tikz}
-\usetikzlibrary{external}
-\tikzexternalize[prefix=build/]
-\usepackage{tikzscale}
-\usepackage[most]{tcolorbox}
-\tcbuselibrary{listings}
-\tcbset{
-  shield externalize,
-  dot/.style={
-    sharp corners,
-    frame hidden,
-    top=4pt,left=4pt,right=4pt,bottom=4pt,
-    enhanced,
-    colback=white,
-    coltitle=black,
-    fonttitle=\scriptsize,
-    attach boxed title to bottom right={
-      xshift=-2mm,yshift=2.75mm},
-    boxed title style={colback=white,frame hidden, 
-      top=0pt,left=0pt,right=0pt,bottom=0pt},
-    borderline={.4pt}{0pt}{black,densely dotted},
-    segmentation style={line width=.4pt,black,densely dotted},
-    }
-}
-\newcommand{\inptikz}[1]{%
-  \tikzsetnextfilename{#1}%
-  \input{tikz/#1.tikz}%
-}
-% --------------------------------------------------
-
-\usepackage{graphicx}
-\usepackage[frak=euler]{mathalpha}
-\usepackage{mathtools}
-\usepackage{hyperref}
-\usepackage{booktabs}
-\usepackage{biblatex}
-\usepackage{chemfig}
-\addbibresource{references.bib}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
 \usepackage{theme/beamerthemeflux}
 \usepackage{theme/palettepaultol}
+
 \author{Any Author}
 \date{Jan. 1st, 2023}
 \title{Beamer Flux Theme}
 \institute{Any University}
+\addbibresource{references.bib}
 
 \begin{document}
-
-\newtcolorbox{dotbox}[1][]{dot,#1}
-\newtcblisting{dotlst}[1][]{
-  dot,listing only,before=\begin{center},after=\end{center},
-  listing options={basicstyle=\ttfamily\scriptsize,commentstyle=\color{gray}\ttfamily,
-  language=TeX},
-  #1
-}
 
 \begin{frame}[plain]
     \maketitle
@@ -98,7 +52,9 @@ Some pacakges are loaded by default, and their styles customized:
     \item enumitem;
     \item mathtools;
     \item tikz/pgf;
-    \item chemfig. \begin{dotlst}[%
+    \item chemfig.%
+     \footnote{\texttt{listing} like the one shown here works with \texttt{\textbackslash{}begin\{onlyenv\}<>}, but not the \texttt{\textbackslash{}only<>} overly.}%
+     \begin{dotlst}[%
       listing side text,righthand ratio=.48,
       title={Chemfig Example: $\mathrm{[BMIM][HOAc]}$}
     ]
@@ -120,19 +76,19 @@ Some pacakges are loaded by default, and their styles customized:
     \column{.48\textwidth}
     \begin{itemize}
       \item Palette taken from \href{https://personal.sron.nl/~pault/#sec:qualitative}{Paul Tol};
-      \item <2-> Insert plots with \href{https://ctan.org/pkg/tikzscale?lang=en}{tikzscale}.%
-      \footnote{\texttt{listing} like the one shown below works with only \texttt{onlyenv}, but not \texttt{\textbackslash{}only} overly.}%
+      \item <2-> Insert plots with \texttt{\textbackslash{}incltikz}.%
+        \footnote{This handels the scaling and externalizing of tikz pictures (see backup for definition).}%
         \begin{onlyenv}<2>
         \begin{dotlst}[title={Example plot}]
-\includegraphics[%
+\incltikz[%
   width=\textwidth,%
   height=.75\textwidth]%
-  {tikz/randplot.tikz}
+  {randplot}
         \end{dotlst}
       \end{onlyenv}
     \end{itemize}
     \column{.48\textwidth}
-    \includegraphics[width=\textwidth,height=.75\textwidth]{tikz/randplot.tikz}
+    \incltikz[width=\textwidth,height=.75\textwidth]{randplot}
   \end{columns}
 \end{frame}
 
@@ -148,16 +104,15 @@ Some pacakges are loaded by default, and their styles customized:
   \item Appendices are backup slides (separate page no.);
   \item Externalizing TikZ pictures.%
   \begin{dotlst}[%
-    listing side comment,righthand ratio=0.38,comment={\inptikz{onsager}}
+    listing side comment,righthand ratio=0.35,comment={\incltikz{onsager}}
     ]
 \usepackage{tikz}
-\usepackage[most]{tcolorbox}
 \usetikzlibrary{external}
-\tikzexternalize[prefix=build/]
-\tcbset{shield externalize}
-\newcommand{\inptikz}[1]{%
-  \tikzsetnextfilename{#1}%
-  \input{tikz/#1.tikz}%
+\tikzexternalize[%
+  prefix=build/,only named=true]
+\newcommand{\inptikz}[2][]{%
+  \tikzsetnextfilename{#2}%
+  \includegraphics[#1]{tikz/#2.tikz}%
 }
   \end{dotlst}
 \end{itemize}

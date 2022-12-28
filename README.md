@@ -1,6 +1,6 @@
 # Beamer Flux Theme
 
-<a href="https://www.overleaf.com/read/" alt="Overleaf"> 
+<a href="https://www.overleaf.com/read/ffrjzvdpzwyj" alt="Overleaf"> 
   <img src="https://img.shields.io/badge/Overleaf-template-47A141?style=flat-square&logo=overleaf" /></a>
 
 A minimalistic beamer theme originally intended for my PhD defence presentation.

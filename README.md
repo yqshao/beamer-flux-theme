@@ -5,6 +5,10 @@
 
 A minimalistic beamer theme originally intended for my PhD defence presentation.
 
+> Disambiguation: the name and style are inspired by the feed reader
+> [miniflux](https://miniflux.app/), and not intended to be confused with the
+> nice and modern [flux beamer](https://github.com/pvanberg/flux-beamer) theme.
+
 ## Screenshots
 
 ![screenshots](screenshots.png)

@@ -8,7 +8,8 @@
 \usepackage{enumitem}
 \usepackage{appendixnumberbeamer}
 \setbeamercovered{transparent}
-
+\usepackage{setspace}
+\usepackage{hanging}
 % tikz and tcb settings =======================================================
 \usepackage{tikz}
 \usetikzlibrary{external}
@@ -67,7 +68,7 @@
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage{booktabs}
-\usepackage{biblatex}
+\usepackage[maxnames=4]{biblatex}
 % =============================================================================
 
 \newlength{\gmargin}
@@ -80,6 +81,7 @@
 \setlength{\vpad}{.01\paperheight}
 \setlength{\sigillsize}{.618\paperheight}
 \setlength{\gwidth}{\dimexpr(\paperwidth-\gmargin*2)}
+\setlength{\footnotesep}{.1em}
 \setlist[1]{leftmargin=\gmargin}
 \setlist[itemize]{label=\faAngleDoubleRight}
 \setlist[2]{leftmargin=\gmargin}
@@ -109,12 +111,11 @@
   \inappendixtrue%
 }
 \renewcommand\appendixname{Appendix}
-
 \setbeamertemplate{title page}[default][left]
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{frametitle}{\vspace{\gmargin}\insertframetitle}
 \setbeamertemplate{caption}{\color{uured}Fig:~\color{black} \raggedright\insertcaption\par}
-\setbeamertemplate{footline}{\vspace{\gmargin}}
+\setbeamertemplate{footline}{\vspace{.5\gmargin}}
 \setbeamertemplate{headline}{%
   \scriptsize\vspace{\gmargin}\hspace{\gmargin}\linenav\hfill%
   {%
@@ -127,8 +128,15 @@
 \hspace{\gmargin}%
   {\tikz{\draw[densely dotted, line width=.4pt] (0,0) -- (\gwidth,0);}}}%
 
-\setbeamertemplate{footnote}{%
-  \makebox[1.8em][l]{\insertfootnotemark}\insertfootnotetext}
+\setbeamertemplate{footnote}%
+{%
+\setlength{\parskip}{0pt}\parindent 0em\noindent%
+\linespread{1.1}\selectfont%
+\hangpara{1.5em}{1}%
+\makebox[1.5em][l]{\insertfootnotemark}\insertfootnotetext\par%
+}
+%{
+% \makebox[1.8em][l]{\insertfootnotemark}\insertfootnotetext}
 
 \setlength\abovecaptionskip{-2pt}
 \setlength\belowcaptionskip{-2pt}
@@ -195,13 +203,13 @@
 \DeclareFieldFormat[article]{pages}{#1}
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]
 {\usebibmacro{prenote}}
-{\tiny\printnames[family]{labelname}%
+{\tiny\printnames[family]{labelname},%
   \ifentrytype{article}{~\printfield{journaltitle}%
     \iffieldundef{volume}{}{~\bfseries\printfield{volume}\normalfont}%
     \iffieldundef{pages}{}{~\printfield{pages}}%
-    ~(\printfield{year})%
-    \iffieldundef{pages}{~\printfield{doi}}{}}%
-  {~\printfield{title}~(\printfield{year})}%
+     (\printfield{year})%
+    \iffieldundef{pages}{ \printfield{doi}}{}}%
+  { \printfield{title} (\printfield{year})}%
   \newunit}%
 {\addperiod\space}%
 {\usebibmacro{postnote}}%
